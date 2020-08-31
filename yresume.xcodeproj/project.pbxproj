@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC4624A824FD2421009647C0 /* url_parser.js in Resources */ = {isa = PBXBuildFile; fileRef = DC4624A724FD2421009647C0 /* url_parser.js */; };
 		DCC3C4D524FA297D0049EB6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3C4D424FA297D0049EB6E /* AppDelegate.swift */; };
 		DCC3C4D824FA297D0049EB6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCC3C4D624FA297D0049EB6E /* Main.storyboard */; };
 		DCC3C4DA24FA297D0049EB6E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3C4D924FA297D0049EB6E /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DC4624A724FD2421009647C0 /* url_parser.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = url_parser.js; sourceTree = "<group>"; };
 		DCC3C4D024FA297D0049EB6E /* yresume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yresume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC3C4D324FA297D0049EB6E /* yresume.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = yresume.entitlements; sourceTree = "<group>"; };
 		DCC3C4D424FA297D0049EB6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				DCC3C4F724FA297E0049EB6E /* popup.html */,
 				DCC3C4F924FA297E0049EB6E /* popup.css */,
 				DCC3C4FB24FA297E0049EB6E /* popup.js */,
+				DC4624A724FD2421009647C0 /* url_parser.js */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				DCC3C4EE24FA297E0049EB6E /* _locales in Resources */,
 				DCC3C4F624FA297E0049EB6E /* content.js in Resources */,
 				DCC3C4FC24FA297E0049EB6E /* popup.js in Resources */,
+				DC4624A824FD2421009647C0 /* url_parser.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +408,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

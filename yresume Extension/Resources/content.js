@@ -1,7 +1,6 @@
-browser.runtime.sendMessage({ greeting: "hello" }).then((response) => {
-    console.log("Received response: ", response);
-});
+if (window.top === window) {
+    let parsedUrl = parse(window.location.href);
+    browser.runtime.sendMessage({ type: "send-title", title: parsedUrl.title, url: parsedUrl.pageUrl });
+    console.log("Url send for update");
+}
 
-browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log("Received request: ", request);
-});
