@@ -21,8 +21,11 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         if messageDictionary?["type"] == "add-title" {
             let title = messageDictionary!["title"]!;
             let url = messageDictionary!["url"]!;
-            var dict = defaults?.object(forKey: "SavedTitles") as? [String: String] ?? [String: String]();
-            dict.updateValue(url, forKey: title);
+            let key = messageDictionary!["key"]!;
+            var dict = defaults?.object(forKey: "SavedTitles") as? [String: [String]] ?? [String: [String]]();
+
+            dict.updateValue([title, url], forKey: key);
+            
             defaults?.set(dict, forKey: "SavedTitles");
             let response = NSExtensionItem()
             response.userInfo = [ SFExtensionMessageKey: "OK"]
@@ -30,21 +33,33 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         } else if messageDictionary?["type"] == "send-title" {
             let title = messageDictionary!["title"]!;
             let url = messageDictionary!["url"]!;
-            var dict = defaults?.object(forKey: "SavedTitles") as? [String: String] ?? [String: String]()
-            if (dict[title] != nil) {
-                dict.updateValue(url, forKey: title);
+            let key = messageDictionary!["key"]!;
+            
+            var dict = defaults?.object(forKey: "SavedTitles") as? [String: [String]] ?? [String: [String]]();
+            if (dict[key] != nil) {
+                dict.updateValue([title, url], forKey: key);
                 defaults?.set(dict, forKey: "SavedTitles");
             }
             let response = NSExtensionItem()
             response.userInfo = [ SFExtensionMessageKey: "OK"]
             context.completeRequest(returningItems: [response], completionHandler: nil)
         } else if messageDictionary?["type"] == "get-titles" {
-            let dict = defaults?.object(forKey: "SavedTitles") as? [String: String] ?? [String: String]()
+            let dict = defaults?.object(forKey: "SavedTitles") as? [String: [String]] ?? [String: [String]]();
             let response = NSExtensionItem()
             response.userInfo = [ SFExtensionMessageKey: dict]
             context.completeRequest(returningItems: [response], completionHandler: nil)
         } else if messageDictionary?["type"] == "clear-titles" {
             defaults?.removeObject(forKey: "SavedTitles");
+            let response = NSExtensionItem()
+            response.userInfo = [ SFExtensionMessageKey: "OK"]
+            context.completeRequest(returningItems: [response], completionHandler: nil)
+        }  else if messageDictionary?["type"] == "remove-title" {
+            let key = messageDictionary!["key"]!;
+            var dict = defaults?.object(forKey: "SavedTitles") as? [String: [String]] ?? [String: [String]]();
+            if (dict[key] != nil) {
+                dict.removeValue(forKey: key);
+                defaults?.set(dict, forKey: "SavedTitles");
+            }
             let response = NSExtensionItem()
             response.userInfo = [ SFExtensionMessageKey: "OK"]
             context.completeRequest(returningItems: [response], completionHandler: nil)

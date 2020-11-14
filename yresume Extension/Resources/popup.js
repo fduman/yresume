@@ -17,7 +17,7 @@ function addUrl() {
         let url = tab.url;
         let parsedUrl = parse(url);
         console.log("parsed for add");
-        browser.runtime.sendNativeMessage('application.id', {type:"add-title", title: parsedUrl.title, url: parsedUrl.pageUrl}, function(response) {
+        browser.runtime.sendNativeMessage('application.id', {type:"add-title", key: parsedUrl.key, title: tab.title, url: parsedUrl.pageUrl}, function(response) {
             console.log("Url added:", url);
             getTitles();
         });
@@ -36,19 +36,23 @@ function getTitles() {
     console.log("get titles");
     browser.runtime.sendNativeMessage('application.id', {type:"get-titles"}, function(response) {
         console.log("Titles fetched");
-        let ul = document.getElementById('list');
-        ul.innerHTML = '';
+        let table = document.getElementById('list');
+        table.innerHTML = '';
         
         for (const [key, value] of Object.entries(response)) {
-            let li = document.createElement('li');
+            console.log("key: ", key);
+            console.log("value: ", value);
+            let row = table.insertRow(0);
+            let cell1 = row.insertCell(0);
+    
             let a = document.createElement('a');
-            let linkText = document.createTextNode(key);
+            let linkText = document.createTextNode(value[0]);
             a.appendChild(linkText);
-            a.title = key;
-            a.href = value;
+            a.title = value[0];
+            a.href = value[1];
             a.target="_blank";
-            li.appendChild(a);
-            ul.appendChild(li);
+            
+            cell1.appendChild(a);
         }
     });
 }
